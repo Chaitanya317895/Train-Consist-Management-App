@@ -1,73 +1,59 @@
 
 
-import java.util.*;
-import java.util.stream.Collectors;
+ import java.util.ArrayList;
+ import java.util.List;
 
-// Bogie Class
-class Bogie {
-    private String name;
-    private String type;
-    private int capacity;
+ // Bogie Class
+ class Bogie {
+     private String name;
+     private int capacity;
 
-    // Constructor
-    public Bogie(String name, String type, int capacity) {
-        this.name = name;
-        this.type = type;
-        this.capacity = capacity;
-    }
+     // Constructor
+     public Bogie(String name, int capacity) {
+         this.name = name;
+         this.capacity = capacity;
+     }
 
-    // Getters
-    public String getName() {
-        return name;
-    }
+     // Getter Methods
+     public String getName() {
+         return name;
+     }
 
-    public String getType() {
-        return type;
-    }
+     public int getCapacity() {
+         return capacity;
+     }
 
-    public int getCapacity() {
-        return capacity;
-    }
+     @Override
+     public String toString() {
+         return name + " - Capacity: " + capacity;
+     }
+ }
 
-    @Override
-    public String toString() {
-        return name + " (Capacity: " + capacity + ")";
-    }
-}
+ // Main Class
+ public class TrainConsistManagementApp {
 
-// Main Class
-public class TrainConsistManagementApp {
+     public static void main(String[] args) {
 
-    public static void main(String[] args) {
+         System.out.println("===== Train Consist Management App - UC10 =====");
 
-        System.out.println("===== Train Consist Management App - UC9 =====");
+         // Create a list of passenger bogies
+         List<Bogie> bogies = new ArrayList<>();
+         bogies.add(new Bogie("Sleeper", 72));
+         bogies.add(new Bogie("AC Chair", 56));
+         bogies.add(new Bogie("First Class", 24));
 
-        // Create a list of bogies
-        List<Bogie> bogies = new ArrayList<>();
-        bogies.add(new Bogie("Sleeper", "Passenger", 72));
-        bogies.add(new Bogie("AC Chair", "Passenger", 56));
-        bogies.add(new Bogie("First Class", "Passenger", 24));
-        bogies.add(new Bogie("Rectangular", "Goods", 100));
-        bogies.add(new Bogie("Cylindrical", "Goods", 80));
-        bogies.add(new Bogie("Sleeper", "Passenger", 72)); // Duplicate for grouping
+         // Display original bogies
+         System.out.println("\nPassenger Bogies:");
+         bogies.forEach(System.out::println);
 
-        // Display original list
-        System.out.println("\nOriginal Bogie List:");
-        bogies.forEach(System.out::println);
+         // Calculate total seating capacity using Stream API
+         int totalSeats = bogies.stream()
+                 .map(Bogie::getCapacity)   // Extract capacity
+                 .reduce(0, Integer::sum);  // Aggregate values
 
-        // Group bogies by type
-        Map<String, List<Bogie>> groupedBogies = bogies.stream()
-                .collect(Collectors.groupingBy(Bogie::getType));
+         // Display total seating capacity
+         System.out.println("\nTotal Seating Capacity of Train: " + totalSeats);
 
-        // Display grouped bogies
-        System.out.println("\nGrouped Bogies by Type:");
-        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
-            System.out.println("\n" + entry.getKey() + " Bogies:");
-            entry.getValue().forEach(bogie ->
-                    System.out.println("  - " + bogie));
-        }
-
-        System.out.println("\nProgram executed successfully.");
-        System.out.println("================================================");
-    }
-}
+         System.out.println("================================================");
+     }
+ }
