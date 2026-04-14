@@ -14,7 +14,7 @@ public class /**
 
 import java.util.LinkedHashSet;
 
-public class UseCase5PreserveInsertionOrder {
+public class TrainConsistManagementApp{
 
     public static void main(String[] args) {
 
