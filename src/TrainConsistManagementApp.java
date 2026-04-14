@@ -1,61 +1,73 @@
-import java.util.ArrayList;
- import java.util.List;
- import java.util.stream.Collectors;
 
- // Bogie Class (Reusable from UC7)
- class Bogie {
-     private String name;
-     private int capacity;
 
-     public Bogie(String name, int capacity) {
-         this.name = name;
-         this.capacity = capacity;
-     }
+import java.util.*;
+import java.util.stream.Collectors;
 
-     public String getName() {
-         return name;
-     }
+// Bogie Class
+class Bogie {
+    private String name;
+    private String type;
+    private int capacity;
 
-     public int getCapacity() {
-         return capacity;
-     }
+    // Constructor
+    public Bogie(String name, String type, int capacity) {
+        this.name = name;
+        this.type = type;
+        this.capacity = capacity;
+    }
 
-     @Override
-     public String toString() {
-         return name + " - Capacity: " + capacity;
-     }
- }
- public class TrainConsistManagementApp {
+    // Getters
+    public String getName() {
+        return name;
+    }
 
-     public static void main(String[] args) {
+    public String getType() {
+        return type;
+    }
 
-         System.out.println("===== Train Consist Management App - UC8 =====");
+    public int getCapacity() {
+        return capacity;
+    }
 
-         // Create list of passenger bogies
-         List<Bogie> passengerBogies = new ArrayList<>();
-         passengerBogies.add(new Bogie("Sleeper", 72));
-         passengerBogies.add(new Bogie("AC Chair", 56));
-         passengerBogies.add(new Bogie("First Class", 24));
-         passengerBogies.add(new Bogie("Luxury Coach", 80));
+    @Override
+    public String toString() {
+        return name + " (Capacity: " + capacity + ")";
+    }
+}
 
-         // Display original list
-         System.out.println("\nOriginal Passenger Bogies:");
-         passengerBogies.forEach(System.out::println);
+// Main Class
+public class TrainConsistManagementApp {
 
-         // Filter bogies with capacity greater than 60
-         int threshold = 60;
-         List<Bogie> filteredBogies = passengerBogies.stream()
-                 .filter(b -> b.getCapacity() > threshold)
-                 .collect(Collectors.toList());
+    public static void main(String[] args) {
 
-         // Display filtered bogies
-         System.out.println("\nFiltered Bogies (Capacity > " + threshold + "):");
-         filteredBogies.forEach(System.out::println);
+        System.out.println("===== Train Consist Management App - UC9 =====");
 
-         // Verify original list remains unchanged
-         System.out.println("\nOriginal List After Filtering (Unchanged):");
-         passengerBogies.forEach(System.out::println);
+        // Create a list of bogies
+        List<Bogie> bogies = new ArrayList<>();
+        bogies.add(new Bogie("Sleeper", "Passenger", 72));
+        bogies.add(new Bogie("AC Chair", "Passenger", 56));
+        bogies.add(new Bogie("First Class", "Passenger", 24));
+        bogies.add(new Bogie("Rectangular", "Goods", 100));
+        bogies.add(new Bogie("Cylindrical", "Goods", 80));
+        bogies.add(new Bogie("Sleeper", "Passenger", 72)); // Duplicate for grouping
 
-         System.out.println("================================================");
-     }
- }
+        // Display original list
+        System.out.println("\nOriginal Bogie List:");
+        bogies.forEach(System.out::println);
+
+        // Group bogies by type
+        Map<String, List<Bogie>> groupedBogies = bogies.stream()
+                .collect(Collectors.groupingBy(Bogie::getType));
+
+        // Display grouped bogies
+        System.out.println("\nGrouped Bogies by Type:");
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println("\n" + entry.getKey() + " Bogies:");
+            entry.getValue().forEach(bogie ->
+                    System.out.println("  - " + bogie));
+        }
+
+        System.out.println("\nProgram executed successfully.");
+        System.out.println("================================================");
+    }
+}
