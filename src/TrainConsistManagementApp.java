@@ -1,40 +1,32 @@
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
-    public class TrainConsistManagementApp {
+        public class TrainConsistManagementApp {
 
-        public static void main(String[] args) {
+            public static void main(String[] args) {
 
-            System.out.println("===== Train Consist Management App - UC2 =====");
+                System.out.println("===== Train Consist Management App - UC3 =====");
 
-            // Create an ArrayList to store passenger bogies
-            ArrayList<String> passengerBogies = new ArrayList<>();
+                // Create a HashSet to store unique bogie IDs
+                Set<String> bogieIDs = new HashSet<>();
 
-            // Add passenger bogies
-            passengerBogies.add("Sleeper");
-            passengerBogies.add("AC Chair");
-            passengerBogies.add("First Class");
+                System.out.println("\nAdding Bogie IDs...");
+                bogieIDs.add("BG101");
+                bogieIDs.add("BG102");
+                bogieIDs.add("BG103");
+                bogieIDs.add("BG101"); // Duplicate
+                bogieIDs.add("BG104");
+                bogieIDs.add("BG102"); // Duplicate
 
-            // Display bogies after insertion
-            System.out.println("\nPassenger Bogies after Addition:");
-            System.out.println(passengerBogies);
+                System.out.println("\nUnique Bogie IDs:");
+                for (String id : bogieIDs) {
+                    System.out.println(id);
+                }
 
-            // Remove a bogie (AC Chair)
-            passengerBogies.remove("AC Chair");
-            System.out.println("\nAfter Removing 'AC Chair':");
-            System.out.println(passengerBogies);
+                System.out.println("\nTotal Unique Bogies: " + bogieIDs.size());
 
-            // Check if a bogie exists
-            if (passengerBogies.contains("Sleeper")) {
-                System.out.println("\n'Sleeper' bogie exists in the train.");
-            } else {
-                System.out.println("\n'Sleeper' bogie does not exist in the train.");
+                System.out.println("\nNote: Duplicate IDs were automatically ignored.");
+                System.out.println("================================================");
             }
-
-            // Display final list
-            System.out.println("\nFinal Passenger Bogies:");
-            System.out.println(passengerBogies);
-
-            System.out.println("\nProgram executed successfully.");
         }
-    }
