@@ -1,83 +1,36 @@
+ import java.util.HashMap;
+ import java.util.Map;
 
-import java.util.LinkedHashSet;
+ public class TrainConsistManagementApp {
 
-public class /**
- * Train Consist Management App
- * Use Case 5: Preserve Insertion Order of Bogies (LinkedHashSet)
- *
- * This program demonstrates how LinkedHashSet maintains the
- * insertion order of bogies while preventing duplicates.
- *
- * Author: Chaitanya
- * Version: 5.0
- */
+     public static void main(String[] args) {
 
-import java.util.LinkedHashSet;
+         System.out.println("===== Train Consist Management App - UC6 =====");
 
-public class TrainConsistManagementApp{
+         // Create a HashMap to store bogie-capacity mappings
+         Map<String, Integer> bogieCapacityMap = new HashMap<>();
 
-    public static void main(String[] args) {
+         // Insert passenger bogie capacities
+         bogieCapacityMap.put("Sleeper", 72);
+         bogieCapacityMap.put("AC Chair", 54);
+         bogieCapacityMap.put("First Class", 24);
 
-        System.out.println("===== Train Consist Management App - UC5 =====");
+         // Insert goods bogie load capacities (in tons)
+         bogieCapacityMap.put("Rectangular Goods", 100);
+         bogieCapacityMap.put("Cylindrical Goods", 80);
 
-        // Create a LinkedHashSet to store bogies
-        LinkedHashSet<String> trainFormation = new LinkedHashSet<>();
+         // Display all bogie capacities
+         System.out.println("\nBogie Capacity Details:");
+         for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
+             System.out.println(entry.getKey() + " -> " + entry.getValue());
+         }
 
-        // Adding bogies to the train formation
-        System.out.println("\nAttaching Bogies...");
-        trainFormation.add("Engine");
-        trainFormation.add("Sleeper");
-        trainFormation.add("Cargo");
-        trainFormation.add("Guard");
+         // Demonstrate fast lookup
+         System.out.println("\nCapacity Lookup:");
+         String bogieType = "Sleeper";
+         System.out.println("Capacity of " + bogieType + ": "
+                 + bogieCapacityMap.get(bogieType));
 
-        // Attempt to add a duplicate bogie
-        System.out.println("Attempting to add duplicate bogie: Sleeper");
-        trainFormation.add("Sleeper"); // Duplicate (ignored automatically)
-
-        // Display the final train formation
-        System.out.println("\nFinal Train Formation (Insertion Order Preserved):");
-        System.out.println(trainFormation);
-
-        // Display each bogie individually
-        System.out.println("\nOrdered Bogie Sequence:");
-        for (String bogie : trainFormation) {
-            System.out.println("→ " + bogie);
-        }
-
-        System.out.println("\nTotal Unique Bogies: " + trainFormation.size());
-        System.out.println("================================================");
-    }
-} {
-
-    public static void main(String[] args) {
-
-        System.out.println("===== Train Consist Management App - UC5 =====");
-
-        // Create a LinkedHashSet to store bogies
-        LinkedHashSet<String> trainFormation = new LinkedHashSet<>();
-
-        // Adding bogies to the train formation
-        System.out.println("\nAttaching Bogies...");
-        trainFormation.add("Engine");
-        trainFormation.add("Sleeper");
-        trainFormation.add("Cargo");
-        trainFormation.add("Guard");
-
-        // Attempt to add a duplicate bogie
-        System.out.println("Attempting to add duplicate bogie: Sleeper");
-        trainFormation.add("Sleeper"); // Duplicate (ignored automatically)
-
-        // Display the final train formation
-        System.out.println("\nFinal Train Formation (Insertion Order Preserved):");
-        System.out.println(trainFormation);
-
-        // Display each bogie individually
-        System.out.println("\nOrdered Bogie Sequence:");
-        for (String bogie : trainFormation) {
-            System.out.println("→ " + bogie);
-        }
-
-        System.out.println("\nTotal Unique Bogies: " + trainFormation.size());
-        System.out.println("================================================");
-    }
-}
+         System.out.println("================================================");
+     }
+ }
